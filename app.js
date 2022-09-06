@@ -12,8 +12,7 @@ console.log("*** Running job at ", date);
 run();
 
 async function run(){    
-    await pollTeslaInventory();    
-    saveVinsFile();
+    await pollTeslaInventory();     
 }
 
 
@@ -31,15 +30,21 @@ async function pollTeslaInventory() {
             {
                 console.log("New Tesla available: ", element.VIN);
 
-                //todo: send email
+                sendEmail();
 
                 knownVins.push(element.VIN);
+
+                saveVinsFile();
             }
         });        
     }    
     else{
         console.log("Tesla Inventory API returned no results");
     }
+}
+
+async function sendEmail() {
+    const response = await fetch("https://us-central1-teslainventorypoll.cloudfunctions.net/reportNewTeslaAvailable");
 }
 
 
