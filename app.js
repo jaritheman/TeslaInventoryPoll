@@ -21,7 +21,7 @@ async function pollTeslaInventory() {
     const res = await fetch(url);
     const json = await res.json();
 
-    if(json.total_matches_found != 0){        
+    if(json.total_matches_found > 0){        
         await readKnownVins();
 
         json.results.forEach(element => {
