@@ -5,16 +5,14 @@ const readline = require('node:readline');
 const databaseFileName = "vins.txt";
 var knownVins = [];
 
-
 var date = moment().format('MMMM Do YYYY, h:mm:ss a');
-console.log("*** Running job at ", date);
+console.log("*** Running job on", date);
 
 run();
 
 async function run(){    
     await pollTeslaInventory();     
 }
-
 
 async function pollTeslaInventory() {
     const url = 'https://www.tesla.com/inventory/api/v1/inventory-results?query={"query":{"model":"m3","condition":"used","options":{},"arrangeby":"Price","order":"asc","market":"FI","language":"fi","super_region":"north america","lng":24.9349,"lat":60.1717,"zip":"","range":0},"offset":0,"count":50,"outsideOffset":0,"outsideSearch":false}';
@@ -46,7 +44,6 @@ async function pollTeslaInventory() {
 async function sendEmail() {
     const response = await fetch("https://us-central1-teslainventorypoll.cloudfunctions.net/reportNewTeslaAvailable");
 }
-
 
 async function readKnownVins() {
     const fileStream = fs.createReadStream(databaseFileName);
@@ -93,5 +90,3 @@ function saveVinsFile(){
     // close the stream
     writeStream.end();
 }
-
-console.log("end of file");
