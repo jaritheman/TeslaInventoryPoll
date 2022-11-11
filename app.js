@@ -56,14 +56,12 @@ async function readKnownVins() {
     // ('\r\n') in input.txt as a single line break.
   
     for await (const line of rl) {
-      // Each line in input.txt will be successively available here as `line`.
-      // console.log(`Line from file: ${line}`);
+      // Each line in input.txt will be successively available here as `line`.      
       knownVins.push(line);
     }
 
     knownVins.forEach(element => {
         console.log("known vin: ", element);        
-        // console.log("includes: ", knownVins.includes(element));
     });
 }
 
