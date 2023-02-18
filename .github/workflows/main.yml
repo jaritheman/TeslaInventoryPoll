@@ -19,6 +19,7 @@ jobs:
       - run: node --version
       - run: npm --version
       - uses: actions/checkout@v3
+      - run: git config --system --add safe.directory /__w/TeslaInventoryPoll/TeslaInventoryPoll
       - run: npm install
       - run: node app.js
       - uses: EndBug/add-and-commit@v9.1.1
